@@ -21,7 +21,6 @@ Buildrequires:perl-devel
 Requires:	perl-Locale-Codes 
 Requires:       perl-Date-Calc 
 Requires:       perl-XML-Parser 
-Buildroot:	%{_tmppath}/%{name}-buildroot
 Buildarch:	noarch
 
 %description
