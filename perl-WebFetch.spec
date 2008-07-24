@@ -1,7 +1,7 @@
 %define name perl-WebFetch
 %define module WebFetch
 %define version 0.10
-%define release %mkrel 11
+%define release %mkrel 13
 
 Name:		%{name}
 Summary:	Perl module to download and save information from the Web
