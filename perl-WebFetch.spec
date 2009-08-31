@@ -1,28 +1,30 @@
-%define name perl-WebFetch
-%define module WebFetch
-%define version 0.10
-%define release %mkrel 14
+%define upstream_name    WebFetch
+%define upstream_version 0.12
 
-Name:		%{name}
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
+
 Summary:	Perl module to download and save information from the Web
-Version:	%{version}
-Release:	%{release}
 License:	GPL
 Group:		Development/Perl
-URL:		http://search.cpan.org/dist/%{module}
-Source:		%{module}-%{version}.tar.bz2
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://cpan.perl.org/modules/by-module/WebFetch/%{upstream_name}-%{upstream_version}.tar.gz
+
+%if %{mdkversion} < 1010
+Buildrequires:perl-devel
+%endif
 Buildrequires:	perl(Date::Calc)
 Buildrequires:  perl(HTML::Parser)
 Buildrequires:  perl-libwww-perl 
 Buildrequires:  perl(XML::Parser)
-%if %{mdkversion} < 1010
-Buildrequires:perl-devel
-%endif
-Requires:	perl-Locale-Codes 
-Requires:       perl-Date-Calc 
-Requires:       perl-XML-Parser 
-Buildroot:	%{_tmppath}/%{name}-buildroot
+
 Buildarch:	noarch
+Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}
+
+Requires:	perl-Locale-Codes 
+Requires:   perl-Date-Calc 
+Requires:   perl-XML-Parser 
 
 %description
 WebFetch is a Perl module to download and save information from the Web, and
@@ -32,21 +34,17 @@ site's news for other sites to include in their web pages.
 
 %prep 
 rm -rf $RPM_BUILD_ROOT
-
-%setup -n %{module}-%{version}
+%setup -n %{upstream_name}-%{upstream_version}
 
 %build
-
 CFLAGS="$RPM_OPT_FLAGS" %{__perl} Makefile.PL INSTALLDIRS=vendor
 make
 make test
 
 
 %install
-
 rm -rf $RPM_BUILD_ROOT
 make PREFIX=$RPM_BUILD_ROOT%{_prefix} DESTDIR=$RPM_BUILD_ROOT install
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -55,9 +53,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc Changes MANIFEST TODO README
 %{perl_vendorlib}/WebFetch*
-%{perl_vendorlib}/auto/WebFetch
 %{perl_vendorlib}/*.pod
 %_mandir/*/*
-
-
-
