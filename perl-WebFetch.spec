@@ -8,7 +8,7 @@ Release:	4
 Summary:	Perl module to download and save information from the Web
 License:	GPL
 Group:		Development/Perl
-Url:		http://search.cpan.org/dist/%{upstream_name}
+Url:		https://search.cpan.org/dist/%{upstream_name}
 Source0:	http://cpan.perl.org/modules/by-module/WebFetch/%{upstream_name}-%{upstream_version}.tar.gz
 
 BuildRequires:	perl-devel
